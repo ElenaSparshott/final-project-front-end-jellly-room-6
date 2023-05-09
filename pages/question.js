@@ -9,6 +9,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { playSound } from "../src/controllers/Audio.js";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const showAnswer = false;
 
 export default function Question({ questions, category, auth0User }) {
@@ -165,7 +167,7 @@ export default function Question({ questions, category, auth0User }) {
 export const getServerSideProps = withPageAuthRequired({
   async getServerSideProps(ctx) {
     // Getting questions from our API by category passed in URL queries
-    const res = await fetch(`https://jellly.herokuapp.com/questions/${ctx.query.category}`);
+    const res = await fetch(`${API_URL}/questions/${ctx.query.category}`);
     const data = await res.json();
     // Storing questions
 
